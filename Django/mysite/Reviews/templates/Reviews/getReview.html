@@ -26,6 +26,7 @@
            updateProducts();
        });
        function updateProducts() {
+           $('#resultsDiv').html("");
            var results = [];
            var search = $("#searchBox").val();
            $.ajax({
@@ -41,9 +42,25 @@
                            "<p>"+this.fields.reviewText+"</p>" +
                            "<p>"+this.fields.location+"</p>" +
                            "<p>"+this.fields.author+"</p>" +
-                           "<p>"+this.fields.rating+"</p>" +
+                           "<p>"+this.fields.upvotes+"</p>" +
                            "<hr>");
-                       responsiveVoice.speak(this.fields.reviewText)
+                       speakString = this.fields.author + " has written: "
+                                    +this.fields.reviewText
+                                    +" This review was upvoted "
+                                    + this.fields.upvotes + " times";
+                       responsiveVoice.speak(speakString);
+                       responsiveVoice.speak("did u find it usefull?");
+                       console.log(this);
+                       confirm("whatdoyathink")
+                       $.ajax({
+                           type: 'POST',
+                           url: 'updateScore/',
+                           dataType: 'json',
+                           data: {'id': this.pk},
+                           success: function() {
+                             console.log("success")
+                           }
+                       });
                    })
                }
            });
