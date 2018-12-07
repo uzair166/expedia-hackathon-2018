@@ -7,4 +7,4 @@ class Review(models.Model):
     location = models.CharField(max_length=50)
     author = models.CharField('Author',max_length=50)
     upvotes = models.IntegerField(default=0)
-    datePosted = models.DateField(auto_now=True)
+    # datePosted = models.DateTimeField(auto_now=True)

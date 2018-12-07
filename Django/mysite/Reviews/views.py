@@ -29,7 +29,7 @@ def getReviews(request, l):
 def submitReview(request):
     print("Hello")
     if request.is_ajax() and request.method == 'POST':
-        r = Review(author=request.POST['author'],location=request.POST['location'],reviewText=request.POST['review'],upvotes=0,datePosted='')
+        r = Review(author=request.POST['author'],location=request.POST['location'],reviewText=request.POST['review'])
         r.save()
         return HttpResponse("Hello")
     else:
