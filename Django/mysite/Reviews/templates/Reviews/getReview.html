@@ -3,39 +3,52 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
 <head>
-    <meta charset="UTF-8">
-    <title>Get Review</title>
+   <meta charset="UTF-8">
+   <title>getReview page</title>
+   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 </head>
 <body>
-    <h1>Search for Reviews</h1>
-    <input type="text" id="searchBox">
-    <button type="submit" id="submitButton">Search</button>
+   <h1>search for reviews</h1>
+   <input type="text" id="searchBox">
+   <button type="submit" id="submitButton">search</button>
+   <div id="resultsDiv"></div>
 
 <script
-  src="https://code.jquery.com/jquery-3.3.1.js"
-  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
-  crossorigin="anonymous"></script>
+ src="https://code.jquery.com/jquery-3.3.1.js"
+ integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+ crossorigin="anonymous"></script>
 
 <script src='https://code.responsivevoice.org/responsivevoice.js'></script>
 <script type="text/javascript">
-    $(document).ready(function(){
-        $("#submitButton").click(function(){
-            updateProducts();
-        });
-        function updateProducts(){
-            var search = $("#searchBox").val();
-            $.ajax({
-                type: 'GET',
-                url: "/reviews/getReviews/" + search + "/",
-                dataType: 'json',
-                success: function(data){
-                    for(var i = 0; i<data.length; i++){
-                        responsiveVoice.speak(data[i].fields.reviewText);
-                    }
-                }
-            })
-        }
-    })
+   var app = angular.module('searchResults', []);
+   $(document).ready(function() {
+       $("#submitButton").click(function () {
+           updateProducts();
+       });
+       function updateProducts() {
+           var results = [];
+           var search = $("#searchBox").val();
+           $.ajax({
+               type: 'GET',
+               url: "/reviews/getReviews/" + search + "/",
+               dataType: 'json',
+               success: function (data) {
+                   for (var i = 0; i < data.length; i++) {
+                       results.push(data[i]);
+                   }
+                   $.each(results, function(){
+                       $('#resultsDiv').append(
+                           "<p>"+this.fields.reviewText+"</p>" +
+                           "<p>"+this.fields.location+"</p>" +
+                           "<p>"+this.fields.author+"</p>" +
+                           "<p>"+this.fields.rating+"</p>" +
+                           "<hr>");
+                       responsiveVoice.speak(this.fields.reviewText)
+                   })
+               }
+           });
+       }
+   });
 </script>
 </body>
 </html>
