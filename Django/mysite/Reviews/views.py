@@ -3,7 +3,6 @@ from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from Reviews.models import Review
 from django.core import serializers
-from django.utils import timezone
 
 
 # Create your views here.
@@ -19,7 +18,7 @@ def displayReviews(request):
 
 def getReviews(request, l):
     if request.is_ajax():
-        results = Review.objects.filter(location=l)
+        results = Review.objects.filter(location=l).order_by('upvotes')
         data = serializers.serialize("json", results)
         return HttpResponse(data, content_type='application/json')
     else:
@@ -29,7 +28,7 @@ def getReviews(request, l):
 def submitReview(request):
     print("Hello")
     if request.is_ajax() and request.method == 'POST':
-        r = Review(author=request.POST['author'],location=request.POST['location'],reviewText=request.POST['review'])
+        r = Review(author=request.POST['author'],location=request.POST['location'],reviewText=request.POST['review'])#,datePosted=datetime.date.today())
         r.save()
         return HttpResponse("Hello")
     else:
