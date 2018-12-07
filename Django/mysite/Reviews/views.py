@@ -25,11 +25,8 @@ def getReviews(request, l):
         raise Http404
 
 def incrementUpvote(request):
-    print("is here")
     if request.is_ajax() and request.method == 'POST':
-        print("hello")
         r = Review.objects.get(pk=request.POST['id'])
-        print(r.reviewText)
         r.upvotes = r.upvotes+1
         r.save()
         return HttpResponse("hello")
