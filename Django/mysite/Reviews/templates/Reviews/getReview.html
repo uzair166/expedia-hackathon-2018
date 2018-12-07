@@ -5,7 +5,30 @@
     <title>getReview page</title>
 </head>
 <body>
+    <h1>Hi</h1>
 
+<script
+  src="https://code.jquery.com/jquery-3.3.1.js"
+  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+  crossorigin="anonymous"></script>
 
+<script src='https://code.responsivevoice.org/responsivevoice.js'></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        updateProducts();
+        function updateProducts(){
+            $.ajax({
+                type: 'GET',
+                url: "/reviews/getReviews/",
+                dataType: 'json',
+                success: function(data){
+                    for(var i = 0; i<data.length; i++){
+                        responsiveVoice.speak(data[i].fields.reviewText);
+                    }
+                }
+            })
+        }
+    })
+</script>
 </body>
 </html>

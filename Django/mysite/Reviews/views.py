@@ -23,6 +23,10 @@ def addReviewPage(request):
     context = {}
     return render(request, 'Reviews/addReview.html', context)
 
+def displayReviews(request):
+    context = {}
+    return render(request, 'Reviews/getReview.html', context)
+
 def getReviews(request):
     if request.is_ajax():
         data = serializers.serialize("json", Review.objects.all())
