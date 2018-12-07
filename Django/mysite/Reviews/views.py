@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from Reviews.models import Review
+from django.core import serializers
 
 # Create your views here.
 
@@ -23,8 +24,11 @@ def addReviewPage(request):
     return render(request, 'Reviews/addReview.html', context)
 
 def getReviews(request):
-    context = {}
-    return render(request, 'Reviews/getReview.html', context)
+    if request.is_ajax():
+        data = serializers.serialize("json", Review.objects.all())
+        return HttpResponse(data, content_type='application/json')
+    else:
+        raise Http404
 
 @csrf_exempt
 def submitReview(request):
