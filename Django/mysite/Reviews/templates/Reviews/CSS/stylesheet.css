@@ -1,6 +1,6 @@
-* {
-    color: white;
-}
+/* * {
+    color: black;
+} */
 
 body {
     background: #06beb6;  /* fallback for old browsers */
@@ -11,4 +11,8 @@ body {
 
 button {
   background: black;
+}
+
+input {
+  color: black;
 }
