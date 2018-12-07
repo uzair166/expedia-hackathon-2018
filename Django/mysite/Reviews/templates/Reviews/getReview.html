@@ -45,7 +45,9 @@
                            "<p>"+this.fields.datePosted+"</p>"+
                            "<hr>");
                        responsiveVoice.speak(this.fields.reviewText)
-                       $.ajax({
+                       var r = confirm("was it usefull?")
+                       if(r == true){
+                           $.ajax({
                            type: 'POST',
                            url: 'incrementupvote/',
                            dataType: 'json',
@@ -54,6 +56,7 @@
                              console.log("success")
                            }
                        });
+                       }
                    })
                }
            });
