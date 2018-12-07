@@ -18,7 +18,7 @@ def displayReviews(request):
 
 def getReviews(request, l):
     if request.is_ajax():
-        results = Review.objects.filter(location=l).order_by('-upvotes','datePosted')
+        results = Review.objects.filter(location=l).order_by('-upvotes','-datePosted')
         data = serializers.serialize("json", results)
         return HttpResponse(data, content_type='application/json')
     else:
