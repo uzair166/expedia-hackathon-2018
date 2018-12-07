@@ -24,7 +24,7 @@ def getReviews(request, l):
     else:
         raise Http404
 
-def incrementUpvotes(request):
+def incrementUpvote(request):
     if request.is_ajax() and request.method == 'POST':
         r = Review.objects.get(pk=request.POST['id'])
         r.upvotes = r.upvotes+1
