@@ -1,21 +1,28 @@
 <!doctype HTML>
 <html>
   <title> Add a Review </title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
-  <!-- <link rel="stylesheet" href="stylesheet.css"> -->
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 </head>
 <body>
   <h1> Type your Review Below: </h1>
   <form>
-    Author: <br><input type="text" name="author" id="author"><br>
-    Location: <br><input type="text" name="location" id="location"><br>
-    Review: <br><textarea name="review" id="review"></textarea><br>
-
+    <div class="form-group">
+      <label for"inputAuthor">Author</label>
+      <input type="text" class="form-control" name="author" id="author" placeholder="Input author here">
+    </div>
+    <!--Author: <br><input type="text" name="author" id="author"><br>-->
+    <div class="form-group">
+      <label for"inputLocation">Location</label>
+      <input type="text" class="form-control" name="location" id="location" placeholder="Input location here">
+    </div>
+    <div class="md-form">
+      <label for="form7">Review</label>
+      <textarea type="text" id="form7" class="md-textarea form-control" rows="3" placeholder="Type your review here"></textarea>
+    </div>
+    <!--Review: <br><input type="text" name="review" id="review"><br>-->
   </form>
-  <button id="addButton", class='addButton'> Add Review </button>
+  <button id="addButton", class='btn btn-primary addButton'> Add Review </button>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"> </script>
   <script type="text/javascript">
 
