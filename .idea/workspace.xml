@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b8eb218a-9264-49b6-bcfc-632a468a5a23" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/Django/mysite/Reviews/templates/Reviews/addReview.html" beforeDir="false" afterPath="$PROJECT_DIR$/Django/mysite/Reviews/templates/Reviews/addReview.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Django/mysite/Reviews/templates/Reviews/getReview.html" beforeDir="false" afterPath="$PROJECT_DIR$/Django/mysite/Reviews/templates/Reviews/getReview.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Django/mysite/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/Django/mysite/db.sqlite3" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -12,11 +14,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Django/mysite/Reviews/templates/Reviews/getReview.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="393">
-              <caret line="49" column="35" selection-start-line="49" selection-start-column="35" selection-end-line="49" selection-end-column="35" />
+            <state relative-caret-position="225">
+              <caret line="41" column="19" lean-forward="true" selection-start-line="41" selection-start-column="19" selection-end-line="41" selection-end-column="19" />
             </state>
           </provider>
         </entry>
@@ -32,11 +34,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Django/mysite/Reviews/templates/Reviews/addReview.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-6">
-              <caret line="23" column="1" selection-start-line="23" selection-start-column="1" selection-end-line="23" selection-end-column="1" />
+            <state relative-caret-position="272">
+              <caret line="18" column="109" selection-start-line="18" selection-start-column="109" selection-end-line="18" selection-end-column="109" />
             </state>
           </provider>
         </entry>
@@ -50,6 +52,7 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/Django/mysite/Reviews/templates/Reviews/getReview.html" />
+        <option value="$PROJECT_DIR$/Django/mysite/Reviews/templates/Reviews/addReview.html" />
       </list>
     </option>
   </component>
@@ -147,12 +150,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1544222902651</updated>
-      <workItem from="1544222903750" duration="486000" />
+      <workItem from="1544222903750" duration="749000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="486000" />
+    <option name="totallyTimeSpent" value="749000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="349" y="23" width="1058" height="819" extended-state="0" />
@@ -185,13 +188,6 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Django/mysite/Reviews/templates/Reviews/addReview.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-6">
-          <caret line="23" column="1" selection-start-line="23" selection-start-column="1" selection-end-line="23" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Django/mysite/Reviews/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-276">
@@ -203,8 +199,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Django/mysite/Reviews/templates/Reviews/getReview.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="393">
-          <caret line="49" column="35" selection-start-line="49" selection-start-column="35" selection-end-line="49" selection-end-column="35" />
+        <state relative-caret-position="225">
+          <caret line="41" column="19" lean-forward="true" selection-start-line="41" selection-start-column="19" selection-end-line="41" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Django/mysite/Reviews/templates/Reviews/addReview.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="18" column="109" selection-start-line="18" selection-start-column="109" selection-end-line="18" selection-end-column="109" />
         </state>
       </provider>
     </entry>

@@ -44,8 +44,8 @@
                            "<p>"+this.fields.upvotes+"</p>" +
                            "<p>"+this.fields.datePosted+"</p>"+
                            "<hr>");
-                       responsiveVoice.speak(this.fields.reviewText)
-                       var r = confirm("was it usefull?")
+                       responsiveVoice.speak(this.fields.reviewText);
+                       var r = confirm("was it usefull?");
                        if(r == true){
                            $.ajax({
                            type: 'POST',
