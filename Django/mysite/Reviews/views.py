@@ -22,6 +22,10 @@ def addReviewPage(request):
     context = {}
     return render(request, 'Reviews/addReview.html', context)
 
+def getReviews(request):
+    context = {}
+    return render(request, 'Reviews/getReview.html', context)
+
 @csrf_exempt
 def submitReview(request):
     print("Hello")

@@ -27,5 +27,7 @@ urlpatterns = [
 
     path('', views.addReviewPage, name='addReviewPage'),
 
+    path('getReviews/', views.getReviews, name='getReview'),
+
     path('submitReview/', views.submitReview, name='submitReview')
 ]
