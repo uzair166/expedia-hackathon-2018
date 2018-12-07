@@ -27,9 +27,10 @@ def displayReviews(request):
     context = {}
     return render(request, 'Reviews/getReview.html', context)
 
-def getReviews(request):
+def getReviews(request, l):
     if request.is_ajax():
-        data = serializers.serialize("json", Review.objects.all())
+        results = Review.objects.filter(location=l)
+        data = serializers.serialize("json", results)
         return HttpResponse(data, content_type='application/json')
     else:
         raise Http404

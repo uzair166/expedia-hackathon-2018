@@ -5,7 +5,9 @@
     <title>getReview page</title>
 </head>
 <body>
-    <h1>Hi</h1>
+    <h1>search for reviews</h1>
+    <input type="text" id="searchBox">
+    <button type="submit" id="submitButton">search</button>
 
 <script
   src="https://code.jquery.com/jquery-3.3.1.js"
@@ -15,11 +17,14 @@
 <script src='https://code.responsivevoice.org/responsivevoice.js'></script>
 <script type="text/javascript">
     $(document).ready(function(){
-        updateProducts();
+        $("#submitButton").click(function(){
+            updateProducts();
+        });
         function updateProducts(){
+            var search = $("#searchBox").val();
             $.ajax({
                 type: 'GET',
-                url: "/reviews/getReviews/",
+                url: "/reviews/getReviews/" + search + "/",
                 dataType: 'json',
                 success: function(data){
                     for(var i = 0; i<data.length; i++){
