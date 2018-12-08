@@ -22,28 +22,25 @@
 
 <script src='https://code.responsivevoice.org/responsivevoice.js'></script>
 <script type="text/javascript">
+   var app = angular.module('searchResults', []);
    $(document).ready(function() {
-       responsiveVoice.speak("What location would you like to hear reviews about?");
-       setTimeout(function(){
-           console.log("start recording ..");
-           askSearchFunc();
-       }, 3000);
-
        $("#submitButton").click(function () {
             console.log("Button pressed")
-            askSearchFunc();
+            testFunc();
+           // updateProducts();
        });
-       function askSearchFunc() {
-         console.log("Request incomming");
-         return $.ajax({
+       function testFunc() {
+         console.log("Request incomming")
+         $.ajax({
            type: 'GET',
            url: "/reviews/getAudio/",
            dataType: 'json',
            success: function(data) {
-             updateProducts(data.message);
+             console.log(data);
            }
          })
        }
+<<<<<<< HEAD
 
        function askUpVoteFunc(review) {
          console.log("Request incomming");
@@ -99,8 +96,11 @@
           return new Promise(resolve => setTimeout(resolve, ms));
         }
        function updateProducts(message) {
+=======
+       function updateProducts() {
+>>>>>>> parent of 43dbf6d... fixed upvote
            var results = [];
-           var search = message;
+           var search = $("#searchBox").val();
            $.ajax({
                type: 'GET',
                url: "/reviews/getReviews/" + search.toLowerCase() + "/",
@@ -125,9 +125,10 @@
                            "<p><strong>Review:</strong>"+data[i].fields.reviewText+"</p>" +
                            "<p><strong>Location:</strong>"+data[i].fields.location+"</p>" +
                            "<p><strong>Author:</strong>"+data[i].fields.author+"</p>" +
-                           "<p id=\"upvotes"+data[i].pk+"\"><strong>Up-votes: </strong>"+data[i].fields.upvotes+"</p>" +
+                           "<p><strong>Up-votes: </strong>"+data[i].fields.upvotes+"</p>" +
                            "<p>"+data[i].fields.datePosted+"</p>"+
                            "<hr>");
+<<<<<<< HEAD
                        speak(data[i]);
                        var current = data[i];
                        setTimeout(function(){
@@ -135,6 +136,23 @@
                            askUpVoteFunc(current);
                        }, 3500);
                        sleep(10000);
+=======
+
+                       responsiveVoice.speak(data[i].fields.reviewText);
+                       var r = confirm("was it usefull?");
+                       if(r == true){
+                           console.log(data[i].pk);
+                           $.ajax({
+                           type: 'POST',
+                           url: '/reviews/incrementupvote/',
+                           dataType: 'json',
+                           data: {'id': data[i].pk},
+                           success: function() {
+                             console.log("success")
+                           }
+                       });
+                       }
+>>>>>>> parent of 43dbf6d... fixed upvote
                    }
                    }
                })
