@@ -27,8 +27,6 @@ def displayReviews(request):
     return render(request, 'Reviews/getReview.html', context)
 
 def getReviews(request, l):
-    found = False
-    wordsInSearch = l.split(" ")
     if request.is_ajax():
         results = Review.objects.filter(location=l).order_by('-upvotes','-datePosted')
         if len(results) == 0:
