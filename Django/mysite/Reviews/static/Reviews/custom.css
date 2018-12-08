@@ -1,21 +1,22 @@
-/* * {
-    color: black;
-} */
 
-body {
-    background: #06beb6;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #48b1bf, #06beb6);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #48b1bf, #06beb6); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    text-align: center;
+label {
+  font-weight: bold;
+  color: white;
 }
 
+body {
+    background: #282b30;  /* fallback for old browsers */
+    text-align: center;
+    color: white;
+}
 
-button {
+div form-control {
   background: black;
+  color: white;
 }
 
 button{
-  background:#1AAB8A;
+  background:#36393f;
   color:#fff;
   border:none;
   position:relative;
@@ -25,11 +26,12 @@ button{
   cursor:pointer;
   transition:800ms ease all;
   outline:none;
+  border-radius: 4px;
 }
-button:hover{
-  background:#fff;
-  color:#1AAB8A;
-}
+/* button:hover{
+  /* background:#aaa;
+  color:#fff;
+} */
 button:before,button:after{
   content:'';
   position:absolute;
