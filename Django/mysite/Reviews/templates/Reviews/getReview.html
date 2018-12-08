@@ -22,27 +22,64 @@
 
 <script src='https://code.responsivevoice.org/responsivevoice.js'></script>
 <script type="text/javascript">
-   var app = angular.module('searchResults', []);
    $(document).ready(function() {
+       responsiveVoice.speak("What location would you like to hear reviews about?");
+       setTimeout(function(){
+           console.log("start recording ..");
+           askSearchFunc();
+       }, 3000);
+
        $("#submitButton").click(function () {
             console.log("Button pressed")
-            testFunc();
-           // updateProducts();
+            askSearchFunc();
        });
-       function testFunc() {
-         console.log("Request incomming")
-         $.ajax({
+       function askSearchFunc() {
+         console.log("Request incomming");
+         return $.ajax({
            type: 'GET',
            url: "/reviews/getAudio/",
            dataType: 'json',
            success: function(data) {
-             console.log(data);
+             updateProducts(data.message);
            }
          })
        }
-       function updateProducts() {
+
+       function askUpVoteFunc(review) {
+         console.log("Request incomming");
+         return $.ajax({
+           type: 'GET',
+           url: "/reviews/getAudio/",
+           dataType: 'json',
+           success: function(data) {
+             console.log(data.message);
+             if(data.message.includes("yes") || data.message.includes("helpful")){
+                 upVote(review);
+                 console.log("upvoted")
+             }
+             responsiveVoice.speak("Thank you for your feedback.")
+           }
+         })
+       }
+       function upVote(review){
+           $.ajax({
+                   type: 'POST',
+                   url: '/reviews/incrementupvote/',
+                   dataType: 'json',
+                   data: {'id': review},
+                   success: function(data) {
+                     console.log(data);
+                     $('#upvotes'+review).html(parseInt($('#upvotes'+review).val(), 10)+1);
+                   }
+               });
+       }
+       function speak(data){
+           responsiveVoice.speak(data.fields.reviewText);
+           responsiveVoice.speak("was this helpfull ? ");
+       }
+       function updateProducts(message) {
            var results = [];
-           var search = $("#searchBox").val();
+           var search = message;
            $.ajax({
                type: 'GET',
                url: "/reviews/getReviews/" + search + "/",
@@ -54,24 +91,16 @@
                            "<p><strong>Review:</strong>"+data[i].fields.reviewText+"</p>" +
                            "<p><strong>Location:</strong>"+data[i].fields.location+"</p>" +
                            "<p><strong>Author:</strong>"+data[i].fields.author+"</p>" +
-                           "<p><strong>Up-votes: </strong>"+data[i].fields.upvotes+"</p>" +
+                           "<p id=\"upvotes"+data[i].pk+"\"><strong>Up-votes: </strong>"+data[i].fields.upvotes+"</p>" +
                            "<p>"+data[i].fields.datePosted+"</p>"+
                            "<hr>");
+                       speak(data[i]);
+                       var current = data[i];
+                       setTimeout(function(){
+                           console.log("give feedback");
+                           askUpVoteFunc(current);
+                       }, 3500);
 
-                       responsiveVoice.speak(data[i].fields.reviewText);
-                       var r = confirm("was it usefull?");
-                       if(r == true){
-                           console.log(data[i].pk);
-                           $.ajax({
-                           type: 'POST',
-                           url: '/reviews/incrementupvote/',
-                           dataType: 'json',
-                           data: {'id': data[i].pk},
-                           success: function() {
-                             console.log("success")
-                           }
-                       });
-                       }
                    }
                        responsiveVoice.speak(this.fields.reviewText)
                    }
