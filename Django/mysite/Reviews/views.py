@@ -27,9 +27,22 @@ def displayReviews(request):
     return render(request, 'Reviews/getReview.html', context)
 
 def getReviews(request, l):
+    found = False
+    wordsInSearch = l.split(" ")
     if request.is_ajax():
         results = Review.objects.filter(location=l).order_by('-upvotes','-datePosted')
-        data = serializers.serialize("json", results)
+        if len(results) == 0:
+            for word in wordsInSearch:
+                results = Review.objects.filter(location=l).order_by('-upvotes','-datePosted')
+                if len(results) > 0:
+                    found = True
+                    break
+        else:
+            found = True
+        if found:
+            data = serializers.serialize("json", results)
+        else:
+            data = serializers.serialize("json", {"return":"No Data"})
         return HttpResponse(data, content_type='application/json')
     else:
         raise Http404

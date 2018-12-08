@@ -43,7 +43,7 @@
             type: 'POST',
             url: 'submitReview/',
             dataType: 'json',
-            data: {'author': author, 'location': location, 'review': review},
+            data: {'author': author.toLowerCase(), 'location': location.toLowerCase(), 'review': review.toLowerCase()},
             success: function() {
               console.log("success")
             }

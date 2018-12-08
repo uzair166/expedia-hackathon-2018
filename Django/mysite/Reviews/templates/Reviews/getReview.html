@@ -82,7 +82,7 @@
            var search = message;
            $.ajax({
                type: 'GET',
-               url: "/reviews/getReviews/" + search + "/",
+               url: "/reviews/getReviews/" + search.toLowerCase() + "/",
                dataType: 'json',
                success: function (data) {
                    $('#resultsDiv').html("");
