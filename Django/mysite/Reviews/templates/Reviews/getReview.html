@@ -22,142 +22,117 @@
 
 <script src='https://code.responsivevoice.org/responsivevoice.js'></script>
 <script type="text/javascript">
-   var app = angular.module('searchResults', []);
-   $(document).ready(function() {
-       $("#submitButton").click(function () {
-            console.log("Button pressed")
-            testFunc();
-           // updateProducts();
-       });
-       function testFunc() {
-         console.log("Request incomming")
-         $.ajax({
-           type: 'GET',
-           url: "/reviews/getAudio/",
-           dataType: 'json',
-           success: function(data) {
-             console.log(data);
-           }
-         })
-       }
-<<<<<<< HEAD
+$(document).ready(function() {
+    responsiveVoice.speak("What location would you like reviews for?");
+    setTimeout(function() {
+        console.log("finished sleeping");
+        askSearch();
+    }, 2000);
 
-       function askUpVoteFunc(review) {
-         console.log("Request incomming");
-         return $.ajax({
-           type: 'GET',
-           url: "/reviews/getAudio/",
-           dataType: 'json',
-           success: function(data) {
-             console.log(data.message);
-             if(data.message.includes("yes") || data.message.includes("helpful")){
-                 upVote(review);
-                 console.log("upvoted")
-             }
-             responsiveVoice.speak("Thank you for your feedback.")
-           }
-         })
-       }
+    function askSearch() {
+        console.log("Request incomming")
+        $.ajax({
+            type: 'GET',
+            url: "/reviews/getAudio/",
+            dataType: 'json',
+            success: function(data) {
+                console.log(data);
+                getReviews(data.message)
+            }
+        })
+    }
 
-       function askForMore() {
-         console.log("Request incomming");
-         return $.ajax({
-           type: 'GET',
-           url: "/reviews/getAudio/",
-           dataType: 'json',
-           success: function(data) {
-             console.log(data.message);
-             if(data.message.includes("yes") || data.message.includes("helpful")){
-                 console.log("continuing ...")
-                 return true;
-             }
-             return false;
-           }
-         })
-       }
+    function getReviews(message) {
+        var search = message;
+        $.ajax({
+            type: 'GET',
+            url: "/reviews/getReviews/" + search.toLowerCase() + "/",
+            dataType: 'json',
+            success: async function (data) {
+                console.log(data);
+                $('#resultsDiv').html("");
+                if(data.return == "No Data"){
+                    responsiveVoice.speak("Sorry, no reviews were found for this location. please try again.")
+                    setTimeout(function(){
+                        location.reload();
+                    }, 5000);
+                }
+                for (var i = 0; i < data.length; i++) {
+                    // if(i % 5 == 4){
+                    //     responsiveVoice.speak("Would you like to here more?");
+                    //     setTimeout(function(){
+                    //        console.log(askForMore());
+                    //     }, 3000)
+                    // }
+                    $('#resultsDiv').append(
+                        "<p><strong>Review:</strong>"+data[i].fields.reviewText+"</p>" +
+                        "<p><strong>Location:</strong>"+data[i].fields.location+"</p>" +
+                        "<p><strong>Author:</strong>"+data[i].fields.author+"</p>" +
+                        "<p><strong>Up-votes: </strong>"+data[i].fields.upvotes+"</p>" +
+                        "<p>"+data[i].fields.datePosted+"</p>"+
+                        "<hr>");
+                        responsiveVoice.speak(data[i].fields.reviewText);
+                        var id=data[i].pk;
+                        console.log(id)
+                        setTimeout(function(){
+                            askUpVoteFunc(id);
+                        },3000);
 
-       function upVote(review){
-           $.ajax({
-                   type: 'POST',
-                   url: '/reviews/incrementupvote/',
-                   dataType: 'json',
-                   data: {'id': review},
-                   success: function(data) {
-                     console.log(data);
-                     $('#upvotes'+review).html(parseInt($('#upvotes'+review).val(), 10)+1);
-                   }
-               });
-       }
-       function speak(data){
-           responsiveVoice.speak(data.fields.reviewText);
-           responsiveVoice.speak("was this helpfull ? ");
-       }
-       function sleep(ms) {
-          return new Promise(resolve => setTimeout(resolve, ms));
+                    }
+                }
+            })
         }
-       function updateProducts(message) {
-=======
-       function updateProducts() {
->>>>>>> parent of 43dbf6d... fixed upvote
-           var results = [];
-           var search = $("#searchBox").val();
-           $.ajax({
-               type: 'GET',
-               url: "/reviews/getReviews/" + search.toLowerCase() + "/",
-               dataType: 'json',
-               success: async function (data) {
-                   console.log(data);
-                   $('#resultsDiv').html("");
-                   if(data.return == "No Data"){
-                       responsiveVoice.speak("Sorry, no reviews were found for this location. please try again.")
-                       setTimeout(function(){
-                           location.reload();
-                           }, 5000);
-                   }
-                   for (var i = 0; i < data.length; i++) {
-                       if(i % 5 == 4){
-                           responsiveVoice.speak("Would you like to here more?");
-                           setTimeout(function(){
-                              console.log(askForMore());
-                           }, 3000)
-                       }
-                       $('#resultsDiv').append(
-                           "<p><strong>Review:</strong>"+data[i].fields.reviewText+"</p>" +
-                           "<p><strong>Location:</strong>"+data[i].fields.location+"</p>" +
-                           "<p><strong>Author:</strong>"+data[i].fields.author+"</p>" +
-                           "<p><strong>Up-votes: </strong>"+data[i].fields.upvotes+"</p>" +
-                           "<p>"+data[i].fields.datePosted+"</p>"+
-                           "<hr>");
-<<<<<<< HEAD
-                       speak(data[i]);
-                       var current = data[i];
-                       setTimeout(function(){
-                           console.log("give feedback");
-                           askUpVoteFunc(current);
-                       }, 3500);
-                       sleep(10000);
-=======
 
-                       responsiveVoice.speak(data[i].fields.reviewText);
-                       var r = confirm("was it usefull?");
-                       if(r == true){
-                           console.log(data[i].pk);
-                           $.ajax({
-                           type: 'POST',
-                           url: '/reviews/incrementupvote/',
-                           dataType: 'json',
-                           data: {'id': data[i].pk},
-                           success: function() {
-                             console.log("success")
-                           }
-                       });
-                       }
->>>>>>> parent of 43dbf6d... fixed upvote
-                   }
-                   }
-               })
-           };
-       });
+        function askUpVoteFunc(review) {
+            responsiveVoice.speak("was this helpful?");
+
+            setTimeout(function() {
+                console.log("Request incomming");
+                $.ajax({
+                    type: 'GET',
+                    url: "/reviews/getAudio/",
+                    dataType: 'json',
+                    success: function(data) {upVote(review, data.message);}
+                });
+            },1750);
+        }
+
+        function upVote(review, message){
+            responsiveVoice.speak("thank you for your feedback.")
+            setTimeout(function() {
+                if(message.includes("yes") || message.includes("helpful") || message.includes("helpful")){
+                    $.ajax({
+                        type: 'POST',
+                        url: '/reviews/incrementupvote/',
+                        dataType: 'json',
+                        data: {'idd': review},
+                        success: function(data) {}
+                    });
+                }
+            },5000);
+        }
+
+        function askForMore() {
+            console.log("Request incomming");
+            return $.ajax({
+                type: 'GET',
+                url: "/reviews/getAudio/",
+                dataType: 'json',
+                success: function(data) {
+                    console.log(data.message);
+                    if(data.message.includes("yes") || data.message.includes("helpful")){
+                        console.log("continuing ...")
+                        return true;
+                    }
+                    return false;
+                }
+            })
+        }
+
+
+
+
+    });
 </script>
 </body>
 </html>

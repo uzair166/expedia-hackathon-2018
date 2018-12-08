@@ -47,9 +47,9 @@ def getReviews(request, l):
         raise Http404
 
 @csrf_exempt
-def incrementUpvotes(request):
+def incrementUpvote(request):
     if request.is_ajax() and request.method == 'POST':
-        r = Review.objects.get(pk=request.POST['id'])
+        r = Review.objects.get(pk=request.POST['idd'])
         r.upvotes = r.upvotes+1
         r.save()
         return HttpResponse("hello")
@@ -84,7 +84,11 @@ def getAudio(request):
         print("Nearly there")
         with harvard as source:
             audio = r.record(source)
-        spokenWords = r.recognize_google(audio).lower()
+        spokenWords = ""
+        try:
+            spokenWords = r.recognize_google(audio).lower()
+        except:
+            spokenWords = ""
         dict = {'message':spokenWords}
         jsonFile = json.dumps(dict)
         print("Win?")
