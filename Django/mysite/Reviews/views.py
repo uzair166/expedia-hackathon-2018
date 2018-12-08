@@ -27,11 +27,13 @@ def displayReviews(request):
     return render(request, 'Reviews/getReview.html', context)
 
 def getReviews(request, l):
+    found = False
     if request.is_ajax():
         results = Review.objects.filter(location=l).order_by('-upvotes','-datePosted')
         if len(results) == 0:
+            wordsInSearch = l.split(' ')
             for word in wordsInSearch:
-                results = Review.objects.filter(location=l).order_by('-upvotes','-datePosted')
+                results = Review.objects.filter(location=word).order_by('-upvotes','-datePosted')
                 if len(results) > 0:
                     found = True
                     break
@@ -70,7 +72,7 @@ def getAudio(request):
         if os.path.isfile("test.flac"):
             os.remove("test.flac")
         print("Start")
-        duration = 5 # sec
+        duration = 3 # sec
         fs = 48000
         recording = sd.rec(int(duration * fs), samplerate=fs, channels=2)
         sd.wait()

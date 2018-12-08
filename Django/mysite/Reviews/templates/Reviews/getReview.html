@@ -27,7 +27,7 @@ $(document).ready(function() {
     setTimeout(function() {
         console.log("finished sleeping");
         askSearch();
-    }, 2000);
+    }, 2500);
 
     function askSearch() {
         console.log("Request incomming")
@@ -56,34 +56,66 @@ $(document).ready(function() {
                     setTimeout(function(){
                         location.reload();
                     }, 5000);
-                }
-                for (var i = 0; i < data.length; i++) {
-                    // if(i % 5 == 4){
-                    //     responsiveVoice.speak("Would you like to here more?");
-                    //     setTimeout(function(){
-                    //        console.log(askForMore());
-                    //     }, 3000)
-                    // }
-                    $('#resultsDiv').append(
-                        "<p><strong>Review:</strong>"+data[i].fields.reviewText+"</p>" +
-                        "<p><strong>Location:</strong>"+data[i].fields.location+"</p>" +
-                        "<p><strong>Author:</strong>"+data[i].fields.author+"</p>" +
-                        "<p><strong>Up-votes: </strong>"+data[i].fields.upvotes+"</p>" +
-                        "<p>"+data[i].fields.datePosted+"</p>"+
-                        "<hr>");
-                        responsiveVoice.speak(data[i].fields.reviewText);
-                        var id=data[i].pk;
-                        console.log(id)
-                        setTimeout(function(){
-                            askUpVoteFunc(id);
-                        },3000);
 
-                    }
                 }
-            })
-        }
+                else{
+                    getReviews2(data);
+                }
+                // for (var i = 0; i < data.length; i++) {
+                //     var text = data[i].fields.reviewText;
+                //     var loc = data[i].fields.location;
+                //     var auth = data[i].fields.location;
+                //     var up = data[i].fields.upvotes;
+                //     var dt = data[i].fields.datePosted;
+                //     var id=data[i].pk;
+                //
+                //         $('#resultsDiv').append(
+                //             "<p><strong>Review:</strong>"+text+"</p>" +
+                //             "<p><strong>Location:</strong>"+loc+"</p>" +
+                //             "<p><strong>Author:</strong>"+auth+"</p>" +
+                //             "<p><strong>Up-votes: </strong>"+up+"</p>" +
+                //             "<p>"+dt+"</p>"+
+                //             "<hr>");
+                //             responsiveVoice.speak(text);
+                //             console.log(id)
+                //             setTimeout(function(){
+                //                 askUpVoteFunc(id);
+                //             },3000);
+                //     //},5000);
+                // }
+            }
+        });
+    }
 
-        function askUpVoteFunc(review) {
+    function getReviews2(data){
+        if (data.length == 0) return;
+        var element = data[0];
+        data.shift();
+
+
+        var text = element.fields.reviewText;
+        var loc = element.fields.location;
+        var auth = element.fields.location;
+        var up = element.fields.upvotes;
+        var dt = element.fields.datePosted;
+        var id=element.pk;
+        $('#resultsDiv').append(
+            "<p><strong>Review:</strong>"+text+"</p>" +
+            "<p><strong>Location:</strong>"+loc+"</p>" +
+            "<p><strong>Author:</strong>"+auth+"</p>" +
+            "<p><strong>Up-votes: </strong>"+up+"</p>" +
+            "<p>"+dt+"</p>"+
+            "<hr>");
+
+        responsiveVoice.speak(text);
+        setTimeout(function(){
+            askUpVoteFunc(id,data);
+
+        },3000);
+
+    }
+
+        function askUpVoteFunc(review,data1) {
             responsiveVoice.speak("was this helpful?");
 
             setTimeout(function() {
@@ -92,12 +124,12 @@ $(document).ready(function() {
                     type: 'GET',
                     url: "/reviews/getAudio/",
                     dataType: 'json',
-                    success: function(data) {upVote(review, data.message);}
+                    success: function(data) {upVote(review, data.message,data1);}
                 });
             },1750);
         }
 
-        function upVote(review, message){
+        function upVote(review, message,data){
             responsiveVoice.speak("thank you for your feedback.")
             setTimeout(function() {
                 if(message.includes("yes") || message.includes("helpful") || message.includes("helpful")){
@@ -109,7 +141,8 @@ $(document).ready(function() {
                         success: function(data) {}
                     });
                 }
-            },5000);
+                getReviews2(data);
+            },1500);
         }
 
         function askForMore() {
