@@ -9,11 +9,18 @@
    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 </head>
 <body>
+  <div class="dropdown" style="float:right;">
+    <button class="dropbtn">Menu</button>
+    <div class="dropdown-content">
+    <a href="#">Home</a>
+    <a href="/reviews">Review A Place</a>
+    <a href="/reviews/displayReviews">Listen to Reviews</a>
+    </div>
+  </div>
   <div class="container"><form>
-   <div class="form-group"><h1>Search for Reviews</h1></div>
-    <div class="form-group"><input type="text" id="searchBox" placeholder="Search..."><br></div>
+   <div class="form-group"><h1><br>Search for Reviews</h1></div>
+   <br>
  </form></div>
-  <div class="form-group"><button type="submit" id="submitButton">Search</button></div>
    <div id="resultsDiv"></div>
 <script
  src="https://code.jquery.com/jquery-3.3.1.js"
