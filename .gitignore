@@ -4,3 +4,4 @@
 Django/mysite/mysite/__pycache__/settings.cpython-37.pyc
 *.pyc
 *.pyc
+*.sqlite3
