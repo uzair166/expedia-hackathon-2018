@@ -59,10 +59,10 @@ $(document).ready(function() {
 
         var id=element.pk;
         $('#resultsDiv').append(
-            "<p><strong>Review:</strong>"+element.fields.reviewText+"</p>" +
-            "<p><strong>Location:</strong>"+loc+"</p>" +
-            "<p><strong>Author:</strong>"+auth+"</p>" +
-            "<p><strong>Up-votes: </strong>"+up+"</p>" +
+            "<p><strong>Review: </strong> "+element.fields.reviewText+"</p>" +
+            "<p><strong>Location: </strong> "+loc+"</p>" +
+            "<p><strong>Author: </strong> "+auth+"</p>" +
+            "<p><strong>Up-votes: </strong> "+up+"</p>" +
             "<p>"+dt+"</p>"+
             "<hr>");
 

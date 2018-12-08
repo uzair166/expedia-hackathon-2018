@@ -3,6 +3,8 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 {% load static %}
 <link rel="stylesheet" href="{% static 'Reviews/custom.css'%}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+
 <head>
    <meta charset="UTF-8">
    <title>Get Reviews</title>
@@ -16,9 +18,12 @@
     <a href="/reviews">Review</a>
     </div>
   </div>
-  <div class="container"><form>
+  <div class="container", style="text-align:center"><form>
    <div class="form-group"><h1><br>Search for Reviews</h1></div>
-   <br>
+
+
+   <div style="text-align:center; margin-top:50px; margin-bottom:100px"><div class="circle"><h1 class="h1 text-center bg-title animated pulse infinite",>Search</h1></div></div>
+<!--<button type="button" class="btn btn-circle btn-xl text-center">  -->
  </form></div>
    <div id="resultsDiv"></div>
 <script
