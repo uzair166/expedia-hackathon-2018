@@ -42,7 +42,7 @@ def getReviews(request, l):
         if found:
             data = serializers.serialize("json", results)
         else:
-            data = serializers.serialize("json", ["return":"No Data"])
+            data = serializers.serialize("json", {"return":"No Data"})
         return HttpResponse(data, content_type='application/json')
     else:
         raise Http404
