@@ -3,6 +3,16 @@ from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from Reviews.models import Review
 from django.core import serializers
+import speech_recognition as sr
+import sounddevice as sd
+import numpy as np
+import scipy.io.wavfile
+import time
+import ffmpy
+import json
+import time
+import os
+import os.path
 
 
 # Create your views here.
@@ -24,6 +34,7 @@ def getReviews(request, l):
     else:
         raise Http404
 
+@csrf_exempt
 def incrementUpvotes(request):
     if request.is_ajax() and request.method == 'POST':
         r = Review.objects.get(pk=request.POST['id'])
@@ -40,3 +51,29 @@ def submitReview(request):
         return HttpResponse("Hello")
     else:
         raise Http404
+
+def getAudio(request):
+        if os.path.isfile("test.wav"):
+            os.remove("test.wav")
+        if os.path.isfile("test.flac"):
+            os.remove("test.flac")
+        print("Start")
+        duration = 5 # sec
+        fs = 48000
+        recording = sd.rec(int(duration * fs), samplerate=fs, channels=2)
+        sd.wait()
+
+        r = sr.Recognizer()
+        print("middle")
+        scipy.io.wavfile.write("test.wav", 48000, recording)
+        ff = ffmpy.FFmpeg(inputs={'test.wav': None},outputs={'test.flac': None})
+        ff.run()
+        harvard = sr.AudioFile("test.flac")
+        print("Nearly there")
+        with harvard as source:
+            audio = r.record(source)
+        spokenWords = r.recognize_google(audio).lower()
+        dict = {'message':spokenWords}
+        jsonFile = json.dumps(dict)
+        print("Win?")
+        return HttpResponse(jsonFile, content_type='application/json')

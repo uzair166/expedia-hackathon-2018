@@ -12,8 +12,8 @@
   <div class="container"><form>
    <div class="form-group"><h1>Search for Reviews</h1></div>
     <div class="form-group"><input type="text" id="searchBox" placeholder="Search..."><br></div>
-    <div class="form-group"><button type="submit" id="submitButton">Search</button></div>
  </form></div>
+  <div class="form-group"><button type="submit" id="submitButton">Search</button></div>
    <div id="resultsDiv"></div>
 <script
  src="https://code.jquery.com/jquery-3.3.1.js"
@@ -25,8 +25,21 @@
    var app = angular.module('searchResults', []);
    $(document).ready(function() {
        $("#submitButton").click(function () {
-           updateProducts();
+            console.log("Button pressed")
+            testFunc();
+           // updateProducts();
        });
+       function testFunc() {
+         console.log("Request incomming")
+         $.ajax({
+           type: 'GET',
+           url: "/reviews/getAudio/",
+           dataType: 'json',
+           success: function(data) {
+             console.log(data);
+           }
+         })
+       }
        function updateProducts() {
            var results = [];
            var search = $("#searchBox").val();
@@ -35,23 +48,36 @@
                url: "/reviews/getReviews/" + search + "/",
                dataType: 'json',
                success: function (data) {
+                   $('#resultsDiv').html("");
                    for (var i = 0; i < data.length; i++) {
-                       results.push(data[i]);
-                   }
-                   $.each(results, function(){
                        $('#resultsDiv').append(
-                           "<p>"+this.fields.reviewText+"</p>" +
-                           "<p>"+this.fields.location+"</p>" +
-                           "<p>"+this.fields.author+"</p>" +
-                           "<p>"+this.fields.upvotes+"</p>" +
-                           "<p>"+this.fields.datePosted+"</p>"+
+                           "<p><strong>Review:</strong>"+data[i].fields.reviewText+"</p>" +
+                           "<p><strong>Location:</strong>"+data[i].fields.location+"</p>" +
+                           "<p><strong>Author:</strong>"+data[i].fields.author+"</p>" +
+                           "<p><strong>Up-votes: </strong>"+data[i].fields.upvotes+"</p>" +
+                           "<p>"+data[i].fields.datePosted+"</p>"+
                            "<hr>");
+
+                       responsiveVoice.speak(data[i].fields.reviewText);
+                       var r = confirm("was it usefull?");
+                       if(r == true){
+                           console.log(data[i].pk);
+                           $.ajax({
+                           type: 'POST',
+                           url: '/reviews/incrementupvote/',
+                           dataType: 'json',
+                           data: {'id': data[i].pk},
+                           success: function() {
+                             console.log("success")
+                           }
+                       });
+                       }
+                   }
                        responsiveVoice.speak(this.fields.reviewText)
-                   })
-               }
-           });
-       }
-   });
+                   }
+               })
+           };
+       });
 </script>
 </body>
 </html>
