@@ -37,28 +37,6 @@ $(document).ready(function() {
                 else{
                     getReviews2(data);
                 }
-                // for (var i = 0; i < data.length; i++) {
-                //     var text = data[i].fields.reviewText;
-                //     var loc = data[i].fields.location;
-                //     var auth = data[i].fields.location;
-                //     var up = data[i].fields.upvotes;
-                //     var dt = data[i].fields.datePosted;
-                //     var id=data[i].pk;
-                //
-                //         $('#resultsDiv').append(
-                //             "<p><strong>Review:</strong>"+text+"</p>" +
-                //             "<p><strong>Location:</strong>"+loc+"</p>" +
-                //             "<p><strong>Author:</strong>"+auth+"</p>" +
-                //             "<p><strong>Up-votes: </strong>"+up+"</p>" +
-                //             "<p>"+dt+"</p>"+
-                //             "<hr>");
-                //             responsiveVoice.speak(text);
-                //             console.log(id)
-                //             setTimeout(function(){
-                //                 askUpVoteFunc(id);
-                //             },3000);
-                //     //},5000);
-                // }
             }
         });
     }

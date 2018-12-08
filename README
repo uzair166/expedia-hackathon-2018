@@ -1,4 +1,11 @@
 ## GitHub for the Expedia Hackathon 2018 (Pink Team)
 This is the repository we used to complete our programming challenge(s)
 
-The challenge was: 
+The challenge was: Design a system that improves the travel experience for a group of people
+We decided to focus on people who were blind, as they have significant issues with deciding on where to go,
+and actually booking everything.
+
+The aim of the system is to make the proces significantly easier, by offering a portal where users could
+find out about what a location is like for a blind person, from verified individuals, both blind and not.
+The intention is that they can then easily book the entire trip at the same time, on the web platform.
+However, due to time limitations, this did not happen in the end.
