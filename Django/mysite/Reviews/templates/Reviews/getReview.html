@@ -93,14 +93,19 @@ $(document).ready(function() {
         data.shift();
 
 
-        var text = element.fields.reviewText;
         var loc = element.fields.location;
-        var auth = element.fields.location;
+        var auth = element.fields.author;
         var up = element.fields.upvotes;
         var dt = element.fields.datePosted;
+
+        var text = auth + " has written: " +
+                   element.fields.reviewText + "."
+                   + " this review was upvoted "
+                   + up + " times.";
+
         var id=element.pk;
         $('#resultsDiv').append(
-            "<p><strong>Review:</strong>"+text+"</p>" +
+            "<p><strong>Review:</strong>"+element.fields.reviewText+"</p>" +
             "<p><strong>Location:</strong>"+loc+"</p>" +
             "<p><strong>Author:</strong>"+auth+"</p>" +
             "<p><strong>Up-votes: </strong>"+up+"</p>" +
@@ -111,7 +116,7 @@ $(document).ready(function() {
         setTimeout(function(){
             askUpVoteFunc(id,data);
 
-        },3000);
+        },9000);
 
     }
 
