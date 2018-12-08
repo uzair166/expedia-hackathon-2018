@@ -61,6 +61,24 @@
            }
          })
        }
+
+       function askForMore() {
+         console.log("Request incomming");
+         return $.ajax({
+           type: 'GET',
+           url: "/reviews/getAudio/",
+           dataType: 'json',
+           success: function(data) {
+             console.log(data.message);
+             if(data.message.includes("yes") || data.message.includes("helpful")){
+                 console.log("continuing ...")
+                 return true;
+             }
+             return false;
+           }
+         })
+       }
+
        function upVote(review){
            $.ajax({
                    type: 'POST',
@@ -77,6 +95,9 @@
            responsiveVoice.speak(data.fields.reviewText);
            responsiveVoice.speak("was this helpfull ? ");
        }
+       function sleep(ms) {
+          return new Promise(resolve => setTimeout(resolve, ms));
+        }
        function updateProducts(message) {
            var results = [];
            var search = message;
@@ -84,9 +105,22 @@
                type: 'GET',
                url: "/reviews/getReviews/" + search.toLowerCase() + "/",
                dataType: 'json',
-               success: function (data) {
+               success: async function (data) {
+                   console.log(data);
                    $('#resultsDiv').html("");
+                   if(data.return == "No Data"){
+                       responsiveVoice.speak("Sorry, no reviews were found for this location. please try again.")
+                       setTimeout(function(){
+                           location.reload();
+                           }, 5000);
+                   }
                    for (var i = 0; i < data.length; i++) {
+                       if(i % 5 == 4){
+                           responsiveVoice.speak("Would you like to here more?");
+                           setTimeout(function(){
+                              console.log(askForMore());
+                           }, 3000)
+                       }
                        $('#resultsDiv').append(
                            "<p><strong>Review:</strong>"+data[i].fields.reviewText+"</p>" +
                            "<p><strong>Location:</strong>"+data[i].fields.location+"</p>" +
@@ -100,9 +134,8 @@
                            console.log("give feedback");
                            askUpVoteFunc(current);
                        }, 3500);
-
+                       sleep(10000);
                    }
-                       responsiveVoice.speak(this.fields.reviewText)
                    }
                })
            };

@@ -2,13 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b8eb218a-9264-49b6-bcfc-632a468a5a23" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Django/mysite/Reviews/templates/Reviews/getReview.html" beforeDir="false" afterPath="$PROJECT_DIR$/Django/mysite/Reviews/templates/Reviews/getReview.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Django/mysite/Reviews/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Django/mysite/Reviews/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Django/mysite/Reviews/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Django/mysite/Reviews/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Django/mysite/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/Django/mysite/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Django/mysite/test.flac" beforeDir="false" afterPath="$PROJECT_DIR$/Django/mysite/test.flac" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Django/mysite/test.wav" beforeDir="false" afterPath="$PROJECT_DIR$/Django/mysite/test.wav" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Django/mysite/test.flac" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Django/mysite/test.wav" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -21,8 +19,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Django/mysite/Reviews/templates/Reviews/getReview.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="452">
-              <caret line="101" column="28" selection-start-line="101" selection-start-column="28" selection-end-line="101" selection-end-column="28" />
+            <state relative-caret-position="372">
+              <caret line="136" column="31" selection-start-line="136" selection-start-column="31" selection-end-line="136" selection-end-column="31" />
             </state>
           </provider>
         </entry>
@@ -39,8 +37,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Django/mysite/Reviews/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="248">
-              <caret line="19" selection-start-line="19" selection-end-line="19" />
+            <state relative-caret-position="180">
+              <caret line="44" column="34" selection-start-line="44" selection-start-column="34" selection-end-line="44" selection-end-column="34" />
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
               </folding>
@@ -51,8 +49,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Django/mysite/Reviews/templates/Reviews/addReview.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-108">
-              <caret line="16" column="30" selection-start-line="16" selection-start-column="30" selection-end-line="16" selection-end-column="30" />
+            <state relative-caret-position="405">
+              <caret line="20" column="1" selection-start-line="20" selection-start-column="1" selection-end-line="20" selection-end-column="1" />
             </state>
           </provider>
         </entry>
@@ -159,12 +157,12 @@
       <option name="presentableId" value="Default" />
       <updated>1544222902651</updated>
       <workItem from="1544222903750" duration="2129000" />
-      <workItem from="1544231806261" duration="5088000" />
+      <workItem from="1544231806261" duration="8488000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="7217000" />
+    <option name="totallyTimeSpent" value="10617000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="441" y="23" width="966" height="819" extended-state="0" />
@@ -206,8 +204,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Django/mysite/Reviews/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="248">
-          <caret line="19" selection-start-line="19" selection-end-line="19" />
+        <state relative-caret-position="180">
+          <caret line="44" column="34" selection-start-line="44" selection-start-column="34" selection-end-line="44" selection-end-column="34" />
           <folding>
             <element signature="e#0#35#0" expanded="true" />
           </folding>
@@ -216,15 +214,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Django/mysite/Reviews/templates/Reviews/addReview.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-108">
-          <caret line="16" column="30" selection-start-line="16" selection-start-column="30" selection-end-line="16" selection-end-column="30" />
+        <state relative-caret-position="405">
+          <caret line="20" column="1" selection-start-line="20" selection-start-column="1" selection-end-line="20" selection-end-column="1" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Django/mysite/Reviews/templates/Reviews/getReview.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="452">
-          <caret line="101" column="28" selection-start-line="101" selection-start-column="28" selection-end-line="101" selection-end-column="28" />
+        <state relative-caret-position="372">
+          <caret line="136" column="31" selection-start-line="136" selection-start-column="31" selection-end-line="136" selection-end-column="31" />
         </state>
       </provider>
     </entry>
