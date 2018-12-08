@@ -45,7 +45,7 @@
            var search = $("#searchBox").val();
            $.ajax({
                type: 'GET',
-               url: "/reviews/getReviews/" + search + "/",
+               url: "/reviews/getReviews/" + search.toLowerCase() + "/",
                dataType: 'json',
                success: function (data) {
                    $('#resultsDiv').html("");
