@@ -1,48 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-{% load static %}
-<link rel="stylesheet" href="{% static 'Reviews/custom.css'%}">
-<head>
-   <meta charset="UTF-8">
-   <title>Get Reviews</title>
-   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
-</head>
-<body>
-  <div class="dropdown" style="float:right;">
-    <button class="dropbtn">Menu</button>
-    <div class="dropdown-content">
-    <a href="/reviews/displayReviews">Home</a>
-    <a href="/reviews">Review</a>
-    </div>
-  </div>
-  <div class="container"><form>
-   <div class="form-group"><h1><br>Search for Reviews</h1></div>
-   <br>
- </form></div>
-   <div id="resultsDiv"></div>
-<script
- src="https://code.jquery.com/jquery-3.3.1.js"
- integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
- crossorigin="anonymous"></script>
-
-<script src='https://code.responsivevoice.org/responsivevoice.js'></script>
-<<<<<<< HEAD
-<script type="text/javascript" src="{% static 'Reviews/getReview.js'%}"></script>
-=======
-<script type="text/javascript">
 $(document).ready(function() {
     responsiveVoice.speak("What location would you like reviews for?");
     setTimeout(function() {
+        console.log("finished sleeping");
         askSearch();
     }, 2500);
 
     function askSearch() {
+        console.log("Request incomming")
         $.ajax({
             type: 'GET',
             url: "/reviews/getAudio/",
             dataType: 'json',
             success: function(data) {
+                console.log(data);
                 getReviews(data.message)
             }
         })
@@ -55,6 +25,7 @@ $(document).ready(function() {
             url: "/reviews/getReviews/" + search.toLowerCase() + "/",
             dataType: 'json',
             success: async function (data) {
+                console.log(data);
                 $('#resultsDiv').html("");
                 if(data.return == "No Data"){
                     responsiveVoice.speak("Sorry, no reviews were found for this location. please try again.")
@@ -66,6 +37,28 @@ $(document).ready(function() {
                 else{
                     getReviews2(data);
                 }
+                // for (var i = 0; i < data.length; i++) {
+                //     var text = data[i].fields.reviewText;
+                //     var loc = data[i].fields.location;
+                //     var auth = data[i].fields.location;
+                //     var up = data[i].fields.upvotes;
+                //     var dt = data[i].fields.datePosted;
+                //     var id=data[i].pk;
+                //
+                //         $('#resultsDiv').append(
+                //             "<p><strong>Review:</strong>"+text+"</p>" +
+                //             "<p><strong>Location:</strong>"+loc+"</p>" +
+                //             "<p><strong>Author:</strong>"+auth+"</p>" +
+                //             "<p><strong>Up-votes: </strong>"+up+"</p>" +
+                //             "<p>"+dt+"</p>"+
+                //             "<hr>");
+                //             responsiveVoice.speak(text);
+                //             console.log(id)
+                //             setTimeout(function(){
+                //                 askUpVoteFunc(id);
+                //             },3000);
+                //     //},5000);
+                // }
             }
         });
     }
@@ -107,6 +100,7 @@ $(document).ready(function() {
             responsiveVoice.speak("was this helpful?");
 
             setTimeout(function() {
+                console.log("Request incomming");
                 $.ajax({
                     type: 'GET',
                     url: "/reviews/getAudio/",
@@ -133,24 +127,19 @@ $(document).ready(function() {
         }
 
         function askForMore() {
+            console.log("Request incomming");
             return $.ajax({
                 type: 'GET',
                 url: "/reviews/getAudio/",
                 dataType: 'json',
                 success: function(data) {
+                    console.log(data.message);
                     if(data.message.includes("yes") || data.message.includes("helpful")){
+                        console.log("continuing ...")
                         return true;
                     }
                     return false;
                 }
             })
         }
-
-
-
-
     });
-</script>
->>>>>>> bb38c75b7b3320ce9015c2b88c004e09ddd74592
-</body>
-</html>

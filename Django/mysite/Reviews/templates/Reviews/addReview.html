@@ -8,9 +8,8 @@
   <div class="dropdown" style="float:right;">
     <button class="dropbtn">Menu</button>
     <div class="dropdown-content">
-    <a href="#">Home</a>
-    <a href="/reviews">Review A Place</a>
-    <a href="/reviews/displayReviews">Listen to Reviews</a>
+    <a href="/reviews/displayReviews">Home</a>
+    <a href="/reviews">Review</a>
     </div>
   </div>
   <div class="container">
@@ -39,22 +38,7 @@
 
   </div>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"> </script>
-  <script type="text/javascript">
-
-      $(document).ready(function() {
-        $('#addButton').click(function() {
-          var author = $('#author').val();
-          var location = $('#location').val();
-          var review = $('#review').val();
-          $.ajax({
-            type: 'POST',
-            url: 'submitReview/',
-            dataType: 'json',
-            data: {'author': author.toLowerCase(), 'location': location.toLowerCase(), 'review': review.toLowerCase()},
-          });
-        });
-      });
-  </script>
+  <script type="text/javascript" src="{% static 'Reviews/addReview.js'%}"></script>
 
 
 </body>
