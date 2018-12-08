@@ -27,11 +27,11 @@ def displayReviews(request):
     return render(request, 'Reviews/getReview.html', context)
 
 def getReviews(request, l):
-    found = False
     if request.is_ajax():
+        found = False
         results = Review.objects.filter(location=l).order_by('-upvotes','-datePosted')
         if len(results) == 0:
-            wordsInSearch = l.split(' ')
+            wordsInSearch = l.split(" ")
             for word in wordsInSearch:
                 results = Review.objects.filter(location=word).order_by('-upvotes','-datePosted')
                 if len(results) > 0:
@@ -58,7 +58,6 @@ def incrementUpvote(request):
 
 @csrf_exempt
 def submitReview(request):
-    print("Hello")
     if request.is_ajax() and request.method == 'POST':
         r = Review(author=request.POST['author'],location=request.POST['location'],reviewText=request.POST['review'])#,datePosted=datetime.date.today())
         r.save()
@@ -67,31 +66,29 @@ def submitReview(request):
         raise Http404
 
 def getAudio(request):
-        if os.path.isfile("test.wav"):
-            os.remove("test.wav")
-        if os.path.isfile("test.flac"):
-            os.remove("test.flac")
-        print("Start")
-        duration = 3 # sec
+        if os.path.isfile("Speech.wav"):
+            os.remove("Speech.wav")
+        if os.path.isfile("Speech.flac"):
+            os.remove("Speech.flac")
+        duration = 5 # sec
         fs = 48000
         recording = sd.rec(int(duration * fs), samplerate=fs, channels=2)
         sd.wait()
 
-        r = sr.Recognizer()
-        print("middle")
-        scipy.io.wavfile.write("test.wav", 48000, recording)
-        ff = ffmpy.FFmpeg(inputs={'test.wav': None},outputs={'test.flac': None})
+        recog = sr.Recognizer()
+        scipy.io.wavfile.write("Speech.wav", 48000, recording)
+        ff = ffmpy.FFmpeg(inputs={'Speech.wav': None},outputs={'Speech.flac': None})
         ff.run()
-        harvard = sr.AudioFile("test.flac")
-        print("Nearly there")
+        harvard = sr.AudioFile("Speech.flac")
         with harvard as source:
-            audio = r.record(source)
+            audio = recog.record(source)
         spokenWords = ""
         try:
-            spokenWords = r.recognize_google(audio).lower()
+            spokenWords = recog.recognize_google(audio).lower()
         except:
             spokenWords = ""
         dict = {'message':spokenWords}
         jsonFile = json.dumps(dict)
-        print("Win?")
+        os.remove("Speech.wav")
+        os.remove("Speech.flac")
         return HttpResponse(jsonFile, content_type='application/json')
